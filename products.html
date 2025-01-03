@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - TechDrives</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white flex flex-col min-h-screen">
+  <!-- Navigation -->
+  <nav class="bg-gray-800 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold text-blue-400">TechDrives</a>
+      <div class="space-x-4">
+        <a href="index.html" class="hover:text-blue-400">Home</a>
+        <a href="products.html" class="hover:text-blue-400">Products</a>
+        <a href="support.html" class="hover:text-blue-400">Support</a>
+        <a href="contact.html" class="hover:text-blue-400">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Products Section -->
+  <section class="container mx-auto py-12">
+    <h2 class="text-3xl font-bold text-center mb-8">Our Products</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Product Card 1 -->
+      <div class="bg-gray-800 rounded-lg p-6">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMzMzMzMzMiLz48dGV4dCB4PSI1MCIgeT0iNTUiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmYiPjFUIE9wdGFuZTwvdGV4dD48L3N2Zz4=" alt="1TB SSD" class="mb-4 rounded-lg">
+        <h3 class="text-xl font-bold mb-2">1TB Ultra SSD</h3>
+        <p class="text-gray-400 mb-4">Blazing fast storage for your PC or laptop</p>
+        <div class="flex justify-between items-center">
+          <span class="text-2xl font-bold">$99.99</span>
+          <button class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg buy-button" data-sku="sku_1TB_SSD">
+            Buy Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Product Card 2 -->
+      <div class="bg-gray-800 rounded-lg p-6">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMzMzMzMzMiLz48dGV4dCB4PSI1MCIgeT0iNTUiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmYiPjJUIEhERDwvdGV4dD48L3N2Zz4=" alt="2TB HDD" class="mb-4 rounded-lg">
+        <h3 class="text-xl font-bold mb-2">2TB Performance HDD</h3>
+        <p class="text-gray-400 mb-4">Reliable storage for your data needs</p>
+        <div class="flex justify-between items-center">
+          <span class="text-2xl font-bold">$79.99</span>
+          <button class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg buy-button" data-sku="sku_2TB_HDD">
+            Buy Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Product Card 3 -->
+      <div class="bg-gray-800 rounded-lg p-6">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMzMzMzMzMiLz48dGV4dCB4PSI1MCIgeT0iNTUiIGZvbnQtc2l6ZT0iMTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmYiPjUwMEdCIFNTRDwvdGV4dD48L3N2Zz4=" alt="500GB SSD" class="mb-4 rounded-lg">
+        <h3 class="text-xl font-bold mb-2">500GB Fast SSD</h3>
+        <p class="text-gray-400 mb-4">Compact and efficient storage solution</p>
+        <div class="flex justify-between items-center">
+          <span class="text-2xl font-bold">$59.99</span>
+          <button class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg buy-button" data-sku="sku_500GB_SSD">
+            Buy Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-8 mt-auto">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2023 TechDrives. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Stripe Script -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="app.js"></script>
+</body>
+</html>
