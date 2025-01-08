@@ -46,3 +46,9 @@ This project uses the following technologies:
 - Add more detailed documentation
 - Implement a more robust database solution
 - Add more payment options
+
+# Recent Troubleshooting
+
+We have been working on resolving an issue with Stripe checkout. Initially, we encountered an error "Failed to fetch Stripe publishable key from server". This was resolved by adding a check in the `useStripe` hook to ensure the component is mounted before fetching the key, preventing potential race conditions.
+
+Currently, we are addressing an issue where the checkout process fails with a 500 (Internal Server Error). We are investigating why the POST request to `/api/create-checkout-session` is failing.

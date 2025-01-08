@@ -1,9 +1,9 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import Stripe from 'stripe';
 import cors from 'cors';
-import dotenv from 'dotenv';
 
-dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -25,7 +25,17 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Get Stripe publishable key
 app.get('/api/get-stripe-key', (req, res) => {
-  res.json({ stripeKey: process.env.STRIPE_PUBLISHABLE_KEY });
+  console.log("GET /api/get-stripe-key");
+  const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+  console.log("Publishable Key:", publishableKey);
+  res.setHeader('Content-Type', 'application/json');
+  if (!publishableKey) {
+    console.error("Stripe Publishable Key not found in environment variables.");
+    return res.status(500).json({ error: 'Stripe publishable key not found' });
+  }
+  console.log("Response Headers:", res.getHeaders());
+  res.json({ publishableKey: publishableKey });
+  console.log("Response Sent");
 });
 
 // Products API endpoint
@@ -36,14 +46,14 @@ app.get('/api/products', (req, res) => {
       name: 'Product 1',
       price: 1000,
       currency: 'USD',
-      image: '/images/product1.jpg',
+      image: ['/images/product1.jpg'],
     },
     {
       id: 2,
       name: 'Product 2',
       price: 2000,
       currency: 'USD',
-      image: '/images/product2.jpg',
+      image: ['/images/product2.jpg'],
     },
   ];
   res.json(products);
@@ -52,19 +62,23 @@ app.get('/api/products', (req, res) => {
 // Create checkout session
 app.post('/api/create-checkout-session', async (req, res) => {
   try {
+    console.log("POST /api/create-checkout-session");
+    console.log("Request Body:", req.body);
     const { cartItems } = req.body;
+    console.log("cartItems:", cartItems);
 
     const lineItems = cartItems.map(item => ({
       price_data: {
         currency: 'usd',
         product_data: {
           name: item.name,
-          images: [item.images[0]],
+          images: item.images,
         },
         unit_amount: item.price,
       },
       quantity: item.quantity,
     }));
+    console.log("lineItems:", lineItems);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -76,6 +90,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
 
     res.json({ url: session.url });
   } catch (error) {
+    console.error("Checkout Error:", error);
     res.status(500).json({ error: error.message });
   }
 });
