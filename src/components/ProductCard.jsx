@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import ProductCarousel from './ProductCarousel';
+import { getPreviewText, formatPrice } from '../utils/textUtils';
 
 const ProductCard = ({ product, onAddToCart, onOpenModal, getPreviewText }) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
@@ -33,7 +34,7 @@ const ProductCard = ({ product, onAddToCart, onOpenModal, getPreviewText }) => {
           )}
         </div>
         <div className="d-flex justify-content-between align-items-center">
-          <h5 className="text-primary">${(product.price / 100).toFixed(2)}</h5>
+          <h5 className="text-primary">{formatPrice(product.price)}</h5>
           <Button
             variant="primary"
             onClick={() => onAddToCart(product)}

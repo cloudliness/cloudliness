@@ -2,7 +2,7 @@ const products = [
     {
         id: 'hd1',
         name: 'Seagate 1TB HDD',
-        price: 5000,
+        price: 57471,
         images: [
             'https://placehold.co/200x200/png',
             'https://placehold.co/200x200/png',
