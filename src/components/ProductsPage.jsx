@@ -9,7 +9,7 @@ const ProductsPage = () => {
   const handleAddToCart = (product) => {
     addToCart({
       ...product,
-      price: product.price / 100 // Ensure price is in dollars
+      price: product.price
     });
   };
 

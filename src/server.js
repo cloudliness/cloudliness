@@ -38,24 +38,10 @@ app.get('/api/get-stripe-key', (req, res) => {
   console.log("Response Sent");
 });
 
+import products from './seed.js';
+
 // Products API endpoint
 app.get('/api/products', (req, res) => {
-  const products = [
-    {
-      id: 1,
-      name: 'Product 1',
-      price: 1000,
-      currency: 'USD',
-      image: ['/images/product1.jpg'],
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      price: 2000,
-      currency: 'USD',
-      image: ['/images/product2.jpg'],
-    },
-  ];
   res.json(products);
 });
 
