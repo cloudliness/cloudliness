@@ -1,0 +1,6 @@
+/* Add styles specific to the Success component here */
+
+.success-message {
+    text-align: center;
+    padding: 20px;
+  }

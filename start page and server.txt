@@ -1,0 +1,7 @@
+Notes: text aligned products page.
+
+http://localhost:5173/admin
+
+npm run dev & node server.mjs
+
+npm run dev & npm run server
