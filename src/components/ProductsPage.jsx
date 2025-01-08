@@ -47,7 +47,7 @@ const ProductsPage = () => {
           <Col key={product.id}>
             <Card className="h-100 shadow-sm">
               <div onClick={() => openModal(product.images)} style={{ cursor: 'pointer' }}>
-                <Carousel interval={null} indicators>
+                <Carousel interval={null} indicators controls={false}>
                   {product.images.map((image, index) => (
                     <Carousel.Item key={index}>
                       <img
