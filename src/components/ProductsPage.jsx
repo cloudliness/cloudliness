@@ -1,8 +1,18 @@
 import React from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import products from '../seed';
+import { useCart } from '../contexts/CartContext';
 
 const ProductsPage = () => {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (product) => {
+    addToCart({
+      ...product,
+      price: product.price / 100 // Ensure price is in dollars
+    });
+  };
+
   return (
     <Container className="my-5">
       <h1 className="text-center mb-4">Our Products</h1>
@@ -24,7 +34,12 @@ const ProductsPage = () => {
                 />
                 <div className="d-flex justify-content-between align-items-center">
                   <h5 className="text-primary">${(product.price / 100).toFixed(2)}</h5>
-                  <Button variant="primary">Add to Cart</Button>
+                  <Button 
+                    variant="primary"
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    Add to Cart
+                  </Button>
                 </div>
               </Card.Body>
             </Card>
