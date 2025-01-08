@@ -7,6 +7,7 @@ const ProductsPage = () => {
   const { addToCart } = useCart();
   const [modalVisible, setModalVisible] = useState(false);
   const [modalImages, setModalImages] = useState([]);
+  const [expandedDescriptions, setExpandedDescriptions] = useState({});
 
   const handleAddToCart = (product) => {
     addToCart({
@@ -22,6 +23,20 @@ const ProductsPage = () => {
 
   const closeModal = () => {
     setModalVisible(false);
+  };
+
+  const toggleDescription = (productId) => {
+    setExpandedDescriptions(prev => ({
+      ...prev,
+      [productId]: !prev[productId]
+    }));
+  };
+
+  const getPreviewText = (html) => {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    const text = tempDiv.textContent || tempDiv.innerText || '';
+    return text.length > 200 ? text.substring(0, 200) + '...' : text;
   };
 
   return (
@@ -47,9 +62,22 @@ const ProductsPage = () => {
               </div>
               <Card.Body className="d-flex flex-column">
                 <Card.Title>{product.name}</Card.Title>
-                <Card.Text className="flex-grow-1 mb-2">
-                  <div dangerouslySetInnerHTML={{ __html: product.description }} />
-                </Card.Text>
+                <div className="flex-grow-1 mb-2">
+                  {expandedDescriptions[product.id] ? (
+                    <div dangerouslySetInnerHTML={{ __html: product.description }} />
+                  ) : (
+                    <div dangerouslySetInnerHTML={{ __html: getPreviewText(product.description) }} />
+                  )}
+                  {product.description.length > 200 && (
+                    <Button
+                      variant="link"
+                      onClick={() => toggleDescription(product.id)}
+                      className="p-0 text-decoration-none"
+                    >
+                      {expandedDescriptions[product.id] ? 'Read Less' : 'Read More'}
+                    </Button>
+                  )}
+                </div>
                 <div className="d-flex justify-content-between align-items-center">
                   <h5 className="text-primary">${(product.price / 100).toFixed(2)}</h5>
                   <Button
