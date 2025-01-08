@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './Cart.css';
 
 const Cart = () => {
-  const { cartItems: cart, removeFromCart, clearCart } = useCart();
+  const { cartItems: cart, removeFromCart, updateCartItemQuantity, clearCart } = useCart();
   const navigate = useNavigate();
 
   const calculateTotal = () => {
@@ -34,31 +34,94 @@ const Cart = () => {
     }
   };
 
+  const incrementQuantity = (itemId) => {
+    const item = cart.find(item => item.id === itemId);
+    updateCartItemQuantity(itemId, item.quantity + 1);
+  };
+
+  const decrementQuantity = (itemId) => {
+    const item = cart.find(item => item.id === itemId);
+    if (item.quantity > 1) {
+      updateCartItemQuantity(itemId, item.quantity - 1);
+    }
+  };
+
   if (cart.length === 0) {
-    return <div className="cart-empty">Your cart is empty.</div>;
+    return (
+      <div className="container my-5">
+        <div className="alert alert-info text-center" role="alert">
+          Your cart is empty.
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="cart">
+    <div className="container mt-5">
       <h2>Your Cart</h2>
-      {cart.map(item => (
-        <div key={item.id} className="cart-item">
-          <img src={item.images[0]} alt={item.name} className="cart-item-image" />
-          <div className="cart-item-details">
-            <h3>{item.name}</h3>
-            <p>Price: ${(item.price / 100).toFixed(2)}</p>
-            <p>Quantity: {item.quantity}</p>
-            <button onClick={() => removeFromCart(item.id)}>Remove</button>
-          </div>
-        </div>
-      ))}
-      <div className="cart-total">
-        Total: ${(calculateTotal() / 100).toFixed(2)}
+      <div className="table-responsive">
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cart.map(item => (
+              <tr key={item.id}>
+                <td>
+                  <div className="d-flex align-items-center">
+                    <img
+                      src={item.images[0]}
+                      alt={item.name}
+                      style={{ width: '50px', height: '50px', marginRight: '10px' }}
+                      className="rounded"
+                    />
+                    {item.name}
+                  </div>
+                </td>
+                <td>${(item.price / 100).toFixed(2)}</td>
+                <td>
+                  <div className="d-inline-flex align-items-center">
+                    <button className="btn btn-sm btn-outline-secondary" onClick={() => decrementQuantity(item.id)}>-</button>
+                    <span className="mx-2">{item.quantity}</span>
+                    <button className="btn btn-sm btn-outline-secondary" onClick={() => incrementQuantity(item.id)}>+</button>
+                  </div>
+                </td>
+                <td>${(item.price * item.quantity / 100).toFixed(2)}</td>
+                <td>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => removeFromCart(item.id)}
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <div className="cart-actions">
-        <button onClick={handleCheckout}>Checkout</button>
-        <button onClick={clearCart}>Clear Cart</button>
-        <button onClick={() => navigate('/products')}>Continue Shopping</button>
+      <div className="d-flex justify-content-between align-items-center mt-3">
+        <h4>Total: ${(calculateTotal() / 100).toFixed(2)}</h4>
+        <div>
+          <button className="btn btn-primary me-2" onClick={handleCheckout}>
+            Checkout
+          </button>
+          <button className="btn btn-danger me-2" onClick={clearCart}>
+            Clear Cart
+          </button>
+          <button
+            className="btn btn-secondary"
+            onClick={() => navigate('/products')}
+          >
+            Continue Shopping
+          </button>
+        </div>
       </div>
     </div>
   );
